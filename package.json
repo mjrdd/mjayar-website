@@ -31,5 +31,8 @@
 		"typescript": "^4.9.5",
 		"vite": "^4.1.1"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"pocketbase": "^0.10.1"
+	}
 }
