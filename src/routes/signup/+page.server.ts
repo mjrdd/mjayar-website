@@ -1,7 +1,7 @@
 import type { Actions } from "./$types";
 import { z } from "zod";
 import { fail, redirect } from "@sveltejs/kit";
-import { handlePocketbaseQuery } from "$lib/pocketbase";
+import { handlePocketBaseQuery } from "$lib/pocketbase";
 
 const bodySchema = z
 	.object({
@@ -32,7 +32,7 @@ export const actions: Actions = {
 			});
 		}
 
-		const { data } = await handlePocketbaseQuery(collection.create(body));
+		const { data } = await handlePocketBaseQuery(collection.create(body));
 
 		if (data) {
 			throw redirect(303, "/login");

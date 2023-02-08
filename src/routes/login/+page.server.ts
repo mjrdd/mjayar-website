@@ -1,7 +1,7 @@
 import type { Actions } from "./$types";
 import { z } from "zod";
 import { fail, redirect } from "@sveltejs/kit";
-import { handlePocketbaseQuery } from "$lib/pocketbase";
+import { handlePocketBaseQuery } from "$lib/pocketbase";
 
 const bodySchema = z.object({
 	email: z.string().email(),
@@ -15,13 +15,10 @@ export const actions: Actions = {
 		const validation = await bodySchema.safeParseAsync(body);
 
 		if (!validation.success) {
-			return fail(400, {
-				email: body.email,
-				...validation.error.flatten()
-			});
+			return fail(400, { email: body.email, ...validation.error.flatten() });
 		}
 
-		const { data } = await handlePocketbaseQuery(
+		const { data } = await handlePocketBaseQuery(
 			collection.authWithPassword(body.email, body.password)
 		);
 

@@ -1,6 +1,6 @@
 import { ClientResponseError } from "pocketbase";
 
-export async function handlePocketbaseQuery<T>(query: T): Promise<{
+export async function handlePocketBaseQuery<T>(query: T): Promise<{
 	data?: Awaited<T>;
 	error?: ClientResponseError;
 }> {
