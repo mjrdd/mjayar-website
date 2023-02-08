@@ -5,6 +5,10 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+	<title>Log in</title>
+</svelte:head>
+
 <FormWrapper title="Log in">
 	<form method="POST">
 		<fieldset>

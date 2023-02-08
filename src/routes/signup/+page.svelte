@@ -5,9 +5,17 @@
 	export let form: ActionData;
 </script>
 
+<svelte:head>
+	<title>Sign up</title>
+</svelte:head>
+
 <FormWrapper title="Sign up">
 	<form method="POST">
 		<fieldset>
+			<div class="grid grid-cols-2 gap-4">
+				<InputField type="text" id="authFirstName" name="firstname" label="First Name" />
+				<InputField type="text" id="authLastName" name="lastname" label="Last Name" />
+			</div>
 			<InputField
 				type="email"
 				id="authEmail"
