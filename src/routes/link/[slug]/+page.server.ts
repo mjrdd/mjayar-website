@@ -6,7 +6,11 @@ export const load = (async ({ locals, params }) => {
 	const COLLECTION_NAME = "links";
 	const collection = locals.pb.collection(COLLECTION_NAME);
 
-	const { data, error: queryError } = await handlePocketBaseQuery(
-		collection.getFirstListItem(`slug="${params.slug}"`)
-	);
+	const { data, error: queryError } = await handlePocketBaseQuery(collection.getOne(params.slug));
+
+	console.log(queryError);
+
+	if (data) {
+		throw redirect(303, data.url);
+	}
 }) satisfies PageServerLoad;
