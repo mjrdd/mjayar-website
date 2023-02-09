@@ -1,7 +1,13 @@
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
 import { z } from "zod";
 import { fail, redirect } from "@sveltejs/kit";
 import { handlePocketBaseQuery } from "$lib/pocketbase";
+
+export const load = (async ({ locals }) => {
+	if (locals.pb.authStore.model) {
+		throw redirect(303, "/");
+	}
+}) satisfies PageServerLoad;
 
 const bodySchema = z
 	.object({
@@ -19,7 +25,7 @@ const bodySchema = z
 		}
 	});
 
-export const actions: Actions = {
+export const actions = {
 	default: async ({ locals, request }) => {
 		const collection = locals.pb.collection("users");
 		const body = Object.fromEntries(await request.formData()) as z.infer<typeof bodySchema>;
@@ -38,4 +44,4 @@ export const actions: Actions = {
 			throw redirect(303, "/login");
 		}
 	}
-};
+} satisfies Actions;
