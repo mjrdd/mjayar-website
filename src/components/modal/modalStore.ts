@@ -10,7 +10,7 @@ export interface ModalInit {
 	id?: string;
 	title: string;
 	slot: ComponentType;
-	onClose?: () => any;
+	onClose?: () => void;
 }
 
 export interface ModalBody extends ModalInit {

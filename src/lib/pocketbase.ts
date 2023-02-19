@@ -5,7 +5,7 @@ export async function handlePocketBaseQuery<T>(query: T): Promise<{
 	error?: ClientResponseError;
 }> {
 	try {
-		const data = await query;
+		const data = await Promise.resolve(query);
 		return { data };
 	} catch (err) {
 		if (err instanceof ClientResponseError) {

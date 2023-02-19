@@ -6,10 +6,6 @@ export const handle = (async ({ event, resolve }) => {
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get("cookie") || "");
 
 	try {
-		if (!event.locals.pb.authStore.isValid) {
-			throw 403;
-		}
-
 		event.locals.pb.authStore.model instanceof Admin
 			? await event.locals.pb.admins.authRefresh()
 			: await event.locals.pb.collection("users").authRefresh();

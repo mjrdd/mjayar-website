@@ -1,7 +1,6 @@
 import type { Actions, PageServerLoad } from "./$types";
 import { fail, redirect } from "@sveltejs/kit";
 import { map, pick } from "lodash-es";
-import { customAlphabet } from "nanoid";
 import { handlePocketBaseQuery } from "$lib/pocketbase";
 
 export const load = (async ({ locals }) => {
@@ -37,9 +36,12 @@ export const actions = {
 			collection.create({
 				id: data.slug,
 				url: data.url,
+				expiry: data.expiry,
 				author: model.id
 			})
 		);
+
+		console.log(JSON.stringify(error));
 
 		if (error) {
 			return fail(400);

@@ -10,6 +10,12 @@
 	};
 
 	export let data: PageServerData;
+
+	function copyToClipboard(event: Event) {
+		if (event.target instanceof HTMLElement) {
+			navigator.clipboard.writeText(event.target.dataset.clipboard ?? "");
+		}
+	}
 </script>
 
 <div class="flex-grow p-4">
@@ -68,11 +74,9 @@
 
 							<button
 								type="button"
-								on:click={() =>
-									navigator.clipboard.writeText(
-										`${$page.url.origin}/link/${record.id}`
-									)}
-								class="inline-block rounded bg-gray-800 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg">
+								data-clipboard="{$page.url.origin}/link/{record.id}"
+								on:click={copyToClipboard}
+								class="inline-block rounded bg-gray-300 px-3 py-1.5 text-sm font-medium uppercase text-gray-800 shadow transition duration-150 ease-in-out hover:bg-gray-400 focus:bg-gray-400 focus:outline-none focus:ring-0 active:bg-gray-400">
 								Copy
 							</button>
 						</td>
